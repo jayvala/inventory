@@ -1,0 +1,30 @@
+uuid: c314ebdb-8aa1-4d3f-a8ef-e91989dbd17e
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:55b9819c-0189-49eb-b78a-a0a29acf76b4'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: totalquantities
+theme: olivero
+region: content_above
+weight: -9
+provider: null
+plugin: 'block_content:55b9819c-0189-49eb-b78a-a0a29acf76b4'
+settings:
+  id: 'block_content:55b9819c-0189-49eb-b78a-a0a29acf76b4'
+  label: 'Total Quantities'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

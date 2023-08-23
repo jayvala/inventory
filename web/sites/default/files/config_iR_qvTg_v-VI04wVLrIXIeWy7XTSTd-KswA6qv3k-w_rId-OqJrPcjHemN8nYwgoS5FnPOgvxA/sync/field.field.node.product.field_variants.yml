@@ -1,0 +1,33 @@
+uuid: 780d326a-8fbe-4871-8067-074a8df7e4da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_variants
+    - node.type.product
+    - taxonomy.vocabulary.variants
+  content:
+    - 'taxonomy_term:variants:614da8d8-a6ce-4759-9cc3-299a352ff47c'
+id: node.product.field_variants
+field_name: field_variants
+entity_type: node
+bundle: product
+label: Variants
+description: 'The product variants'
+required: true
+translatable: false
+default_value:
+  -
+    target_uuid: 614da8d8-a6ce-4759-9cc3-299a352ff47c
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      variants: variants
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,12 @@
+name: 'Views Timestamp to Date'
+description: 'Creates a Views field handler that consumes a timestamp field and outputs a date in different formats.'
+type: module
+package: Views
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - drupal:views
+
+# Information added by Drupal.org packaging script on 2022-09-06
+version: '1.0.1'
+project: 'views_timestamp_to_date'
+datestamp: 1662479872

@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * Implements hook_views_data().
+ */
+function views_timestamp_to_date_views_data() {
+  $data['views_timestamp_to_date']['table']['group'] = t('Global');
+  $data['views_timestamp_to_date']['table']['join'] = [
+    // Exist in all views.
+    '#global' => [],
+  ];
+  $data['views_timestamp_to_date']['field_views_timestamp_to_date'] = [
+    'title' => t('Timestamp to Date'),
+    'help' => t('Views field that consumes a timestamp field and outputs a data in various formats.'),
+    'field' => [
+      'id' => 'field_views_timestamp_to_date',
+    ],
+  ];
+
+  return $data;
+}

@@ -1,0 +1,73 @@
+/**
+ * Installs the database schema.
+ */
+function custom_module_install() {
+  drupal_install_schema('product_stock_data');
+}
+
+/**
+ * Uninstalls the database schema.
+ */
+function custom_module_uninstall() {
+  drupal_uninstall_schema('product_stock_data');
+}
+
+/**
+* Creates the tables using the schema API.
+*/
+function custom_module_schema() {
+  $schema['product_stock_data'] = array(
+    'description' => 'Data related to product stock!',
+    'fields' => array(
+      'sid' => array(
+        'description' => 'Stock ID',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'product_name' => array(
+        'description' => 'Product name',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'variants' => array(
+        'description' => 'Product variants',
+        'type' => 'text',
+      ),
+      'total_quantity' => array(
+        'description' => 'Total quantities of product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'in_transit' => array(
+        'description' => 'In transit quantities of product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'reached_to_customer' => array(
+        'description' => 'Stock reached to customer',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'rto' => array(
+        'description' => 'RTO of product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'loss' => array(
+        'description' => 'Loss or damage quantities of product',
+        'type' => 'int',
+        'unsigned' => TRUE,
+      ),
+      'changed' => array(
+        'description' =>'Product updated date',
+        'type' => 'datetime',
+        'size' => 'normal',
+        'not null' => TRUE,
+      ),
+
+    ),
+
+    'primary key' => array('sid'),
+  );
+}

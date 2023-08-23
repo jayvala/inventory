@@ -1,0 +1,6 @@
+product_stock_data:
+  table_name: product_stock_data
+  table_database: default
+  description: 'View of Product Stock Data'
+  column_relations: 'a:7:{s:3:"sid";s:18:"product_stock_data";s:14:"total_quantity";s:18:"product_stock_data";s:10:"in_transit";s:18:"product_stock_data";s:19:"reached_to_customer";s:18:"product_stock_data";s:3:"rto";s:18:"product_stock_data";s:4:"loss";s:18:"product_stock_data";s:7:"changed";s:18:"product_stock_data";}'
+  created_by: '1'

@@ -1,0 +1,8 @@
+uuid: 24e70c0c-8a94-4b29-867d-054cc9dfbea0
+langcode: en
+status: true
+dependencies: {  }
+name: Variants
+vid: variants
+description: 'The product variants'
+weight: 0

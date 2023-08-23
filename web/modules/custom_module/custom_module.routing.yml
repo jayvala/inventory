@@ -1,0 +1,7 @@
+webform_submission_mailer.ws_mailer:
+  path: "/custom-module"
+  defaults:
+    _controller: '\Drupal\custom_module\Controller\WSHandler::build'
+    _title: "Custom module"
+  requirements:
+    _permission: "access content"

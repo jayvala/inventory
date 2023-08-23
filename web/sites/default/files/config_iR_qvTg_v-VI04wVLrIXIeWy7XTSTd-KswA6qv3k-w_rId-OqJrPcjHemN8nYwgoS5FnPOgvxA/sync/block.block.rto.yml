@@ -1,0 +1,30 @@
+uuid: 6bc4dd3f-aae1-4d61-aeb4-f68354560f34
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:171c1e24-006f-4cbe-990f-4365717ed467'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: rto
+theme: olivero
+region: content_above
+weight: -6
+provider: null
+plugin: 'block_content:171c1e24-006f-4cbe-990f-4365717ed467'
+settings:
+  id: 'block_content:171c1e24-006f-4cbe-990f-4365717ed467'
+  label: RTO
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

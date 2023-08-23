@@ -1,0 +1,232 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Database\Connection;
+use Drupal\Core\Datetime\DrupalDateTime;
+use Drupal\webform\Entity\WebformSubmission;
+use Drupal\node\Entity\Node;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Block\BlockPluginInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_module_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if($form_id == 'node_product_form') {
+    $form['#attached']['library'][] = 'custom_module/custom_node';
+    foreach (array_keys($form['actions']) as $action) {
+      if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+        $form['actions'][$action]['#submit'][] = 'custom_module_form_submit';
+      }
+    }
+  }
+  if($form_id == 'webform_submission_product_stock_update_add_form') {
+    $form['#attached']['library'][] = 'custom_module/custom_node';
+  }
+}
+
+function custom_module_form_submit(array $form, FormStateInterface $form_state){
+  // $connection = \Drupal::service('database');
+  $field = $form_state->getValues();
+  // dump($field);
+  // dump($field);
+  $product_name = $field['title'][0]['value'];
+  // dump($field['field_variants'][0]['target_id']);
+  
+  // $variants = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($field['field_variants'][0]['target_id']);
+  // $variants = $variants->name->value;
+  
+  if(is_array($field['field_variants'][0]['target_id'])){
+    $variants = $field['field_variants'][0]['target_id']['entity']->get('name')->value;
+  }
+  else{
+    $variants = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($field['field_variants'][0]['target_id']);
+    $variants = $variants->name->value;
+  }
+  // $variants = Term::load($field['field_variants'][0]['target_id']);
+  // $variants = $variants->getName();
+  // $variants = $field['field_variants'][0]['target_id']['entity']->get('name')->value;
+  // $term = $term['widget'];
+  // dump($term);
+  // $term = $term['entity'];
+  // dump($term);
+  // foreach($term as $k => $v){
+  //   $result[$k] = $v;
+  // }
+  // dump($result);
+  // $variants = Term::load($term);
+  // $variants = $variants->getName();
+  // dump($variants);
+  $total_quantity = $field['field_warehouse_quantity'][0]['value'];
+  $date_value = $field['field_as_of_date'][0]['value'];
+  dump($date_value);
+  
+  // $userTimezone = new DateTimeZone(date_default_timezone_get());
+  // $gmtTimezone = new DateTimeZone('GMT');
+  // $myDateTime = new DateTime($date_value, $gmtTimezone);
+  // $offset = $userTimezone->getOffset($myDateTime);
+  // $myInterval = DateInterval::createFromDateString((string)$offset . 'seconds');
+  // $myDateTime->add($myInterval);
+  //$changed = $date_value->__toString();
+  // $changed = $date_value->format("d-m-Y H:i");
+  $date_value = new DateTime($date_value);
+  $date_value->setTimezone(new DateTimezone('Asia/Kolkata'));
+  dump($date_value);
+  $date = $date_value->format('Y-m-d');
+  dump($date);
+  
+  dump($product_name);
+  dump($variants);
+  dump($total_quantity);
+  dump($date);
+  //date is coming incremental
+  $query = \Drupal::database()->select('product_stock_data', 'psd');
+  $query->fields('psd');
+  $query->condition('psd.product_name', $product_name);
+  // $query->isNull('psd.variants');
+  $query->condition('psd.variants', $variants);
+  $results = $query->execute()->fetchAssoc();
+  if($results){
+    // unset($form['actions']['submit']['#submit'][1]);
+    \Drupal::messenger()->addMessage(t('Product with same variant already available!'));
+    
+  }
+  else {
+    $result = \Drupal::database()->insert('product_stock_data')
+      ->fields([
+        'product_name' => $product_name,
+        'variants' => $variants,
+        'total_quantity' => $total_quantity,
+        'changed' => $date,
+      ])
+      ->execute();
+
+    $form_state->setRedirect('<front>');
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+
+ function custom_module_webform_submission_presave(WebformSubmission $submission) {
+  
+  $submission_data = $submission->getData();
+  //TO DO: Add this for specific webform here
+  foreach($submission_data as $key => $value) {
+    if($key == 'product_title' && $submission_data['product_title'] > 0){
+      $submission_data['product_title'] = Node::load($submission_data['product_title'])->label();
+    }
+
+    if($key == 'variant' && $submission_data['variant'] > 0){
+      $submission_data['variant'] = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($submission_data['variant'])->name->value;
+    }
+  }
+  dump("Submission Data");
+  dump($submission_data);
+  // $result = $connection->select('product_stock_data', 'psd')
+  // ->condition('psd.product_name', 'test1')
+  // ->condition('psd.variants', 'black')
+  // ->execute();
+  $query = \Drupal::database()->select('product_stock_data', 'psd');
+  $query->fields('psd');
+  $query->condition('psd.product_name', $submission_data['product_title']);
+  // $query->isNull('psd.variants');
+  $query->condition('psd.variants', $submission_data['variant']);
+  $results = $query->execute()->fetchAssoc();
+  dump("Results");
+  dump($results);
+  
+  if($results){
+    if($results['product_name'] == $submission_data['product_title'] && $results['variants'] == $submission_data['variant']){
+      $product_name = $submission_data['product_title'];
+      $variants = $submission_data['variant'];
+      $total_quantity = $results['total_quantity'];
+      $in_transit = $results['in_transit'];
+      $reached_to_customer = $results['reached_to_customer'];
+      $rto = $results['rto'];
+      $loss = $results['loss'];
+      $changed = $results['changed'];
+      if($submission_data['add_extra_quantity'] > 0){
+        $total_quantity += $submission_data['add_extra_quantity'];
+        // dump("Total quantities");
+        // dump($total_quantity);
+      }
+      if($submission_data['in_transit_stocks'] > 0){
+        $in_transit += $submission_data['in_transit_stocks'];
+        // $total_quantity -= $submission_data['in_transit_stocks'];
+        $total_quantity -= $in_transit;
+        // dump("Total quantities");
+        // dump($total_quantity);
+        // dump("In transit");
+        // dump($in_transit);
+      }
+      if($submission_data['stocks_reached_to_customer'] > 0){
+        $reached_to_customer += $submission_data['stocks_reached_to_customer'];
+        $in_transit -= $reached_to_customer;
+        // dump("Reached to customer");
+        // dump($reached_to_customer);
+        // dump("In transit");
+        // dump($in_transit);
+      }
+      // conditions need to validate with VR.
+      if($submission_data['return_to_office'] > 0){
+         $rto += $submission_data['return_to_office'];
+         $in_transit -= $rto;
+         $total_quantity += $rto;
+      }
+      // damaged product reduce from total quantities but how we are countin loss needs to check with VR.
+      if($submission_data['loss_damage_product'] > 0) {
+        $loss += $submission_data['loss_damage_product'];
+        $in_transit -= $loss;
+        // dump("Loss");
+        // dump($loss);
+        // dump("Total quantities");
+        // dump($total_quantity);
+      }
+      
+      $changed = (new \DateTime($submission_data['product_updated'], new \DateTimeZone('Asia/Kolkata')))->format('Y-m-d');
+
+      // dump($total_quantity);
+      // dump($in_transit);
+      // dump($reached_to_customer);
+      // dump($rto);
+      // dump($loss);
+      $result = \Drupal::database()->update('product_stock_data')
+       ->fields([
+        'product_name' => $product_name,
+        'variants' => $variants,
+        'total_quantity' => $total_quantity,
+        'in_transit' => $in_transit,
+        'reached_to_customer' =>$reached_to_customer,
+        'rto' => $rto,
+        'loss' => $loss,
+        'changed' => $changed,
+      ])
+      ->condition('product_name', $product_name)
+      ->condition('variants', $variants)
+      ->execute();
+    
+    \Drupal::messenger()->addMessage(t('Data updated succesfully!'));
+    }
+  }
+  else{
+    \Drupal::messenger()->addMessage(t('Please check product name and variants! If not available in product then add it first!'));
+  }
+}
+
+function custom_module_preprocess_page(&$variables) {
+  //check if current page is front page
+  if (\Drupal::service('path.matcher')->isFrontPage()){
+    $variables['#attached']['library'][] = 'custom_module/custom';
+  }
+}
+// this all should come while we are submitting webform and product node
+//1. Fetch Data from Webform
+//2. Product node entry to db table
+//3. Use that data and update the db table based on product and variant
+//4. Here use query for transit and update table based on it
+//5. Create view from db table
+//6. apply filter on it

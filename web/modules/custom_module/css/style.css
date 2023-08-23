@@ -1,0 +1,45 @@
+@media only screen and (min-width: 768px) {
+	.content{
+		display: block !important;
+	}
+	.view-filters {
+		display: inline-block !important;
+		width: 20%;
+		float: left;
+		margin: 0;
+		padding: 0
+			
+	}
+	.view-filters label {
+		font-weight:bold;
+		color: #0D77B5;
+	}
+	.view-content {
+		display: inline-block !important;
+		width: 79%;
+		margin-top: 0px;
+	}
+	.view-content tr:nth-child(even) {
+		background-color: #0D77B5;
+		color: #fff;
+	}
+	.form-element--type-text{
+		width: 150px !important;
+	}
+	.views-table {
+		margin-top: 0px !important;
+	}
+
+	.pager {
+		display: flex;
+		justify-content: center;
+	}
+
+	.layout--pass--content-medium {
+		text-align: center !important;
+	}
+
+	.layout--pass--content-medium > * {
+			grid-column: 2/14 !important;
+	}
+}

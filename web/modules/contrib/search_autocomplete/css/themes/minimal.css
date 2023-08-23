@@ -1,0 +1,42 @@
+/*
+ * SEARCH AUTOCOMPLETE
+ * Minimal theme.
+ */
+
+/**
+ * THEME MINIMAL
+ */
+
+/* Input box */
+.js input.form-autocomplete {
+  border: 1px solid #ccc;
+}
+
+/* Suggestion menu style */
+ul[data-sa-theme="minimal"] {
+  min-width: 350px;
+}
+
+ul[data-sa-theme="minimal"] > div.ui-autocomplete-field-group,
+ul[data-sa-theme="minimal"] .ui-autocomplete-fields > *,
+ul[data-sa-theme="minimal"] .ui-state-active,
+ul[data-sa-theme="minimal"] .ui-menu-item-wrapper,
+ul[data-sa-theme="minimal"] .ui-menu-item-wrapper.ui-state-active {
+  display: block;
+}
+
+/**
+ * Olivero specifics
+ */
+[id^="block-olivero-search-form"] .block-search-wide__wrapper {
+  overflow: visible;
+}
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] {
+  display: block;
+  transform: translateY(100%);
+  box-shadow: none;
+}
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] a.ui-menu-item-wrapper.ui-state-active,
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] a.ui-menu-item-wrapper:hover {
+  background: var(--color--primary-50);
+}

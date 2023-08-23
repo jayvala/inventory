@@ -1,0 +1,38 @@
+/*
+ * SEARCH AUTOCOMPLETE
+ * Helper file to build your own theme.
+ */
+
+/**
+ * THEME CUSTOM
+ *
+ * 1- duplicate this file
+ * 2- rename this "your theme".css
+ */
+
+.js input.form-autocomplete {
+  border: 1px solid #ccc;
+}
+
+/*
+ * Targeting this style example :
+ */
+ul[data-sa-theme="CUSTOM_THEME_NAME"] {
+  min-width: 350px;
+}
+
+/**
+ * Olivero specifics
+ */
+[id^="block-olivero-search-form"] .block-search-wide__wrapper {
+  overflow: visible;
+}
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] {
+  display: block;
+  transform: translateY(100%);
+  box-shadow: none;
+}
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] a.ui-menu-item-wrapper.ui-state-active,
+[id^="block-olivero-search-form"] ul[data-sa-theme="minimal"] a.ui-menu-item-wrapper:hover {
+  background: var(--color--primary-50);
+}

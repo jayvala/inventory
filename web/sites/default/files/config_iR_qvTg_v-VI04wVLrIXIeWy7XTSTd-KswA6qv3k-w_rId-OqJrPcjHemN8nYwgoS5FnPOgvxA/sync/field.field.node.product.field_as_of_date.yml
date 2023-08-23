@@ -1,0 +1,24 @@
+uuid: 51be90fc-5f99-4830-a601-e52dedc42dad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_as_of_date
+    - node.type.product
+  module:
+    - datetime
+id: node.product.field_as_of_date
+field_name: field_as_of_date
+entity_type: node
+bundle: product
+label: 'As of date'
+description: 'Product as of the date'
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

@@ -1,0 +1,14 @@
+uuid: 1a2c8115-135f-41c8-bf78-5450afd8d40b
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.cms
+  module:
+    - user
+id: user_add_role_action.cms
+label: 'Add the cms role to the selected user(s)'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: cms

@@ -1,0 +1,25 @@
+uuid: b2c4b700-cad3-4dd9-8a2d-557793203eeb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_warehouse_quantity
+    - node.type.product
+id: node.product.field_warehouse_quantity
+field_name: field_warehouse_quantity
+entity_type: node
+bundle: product
+label: 'Warehouse Quantity'
+description: 'This quantities of product at warehouse'
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

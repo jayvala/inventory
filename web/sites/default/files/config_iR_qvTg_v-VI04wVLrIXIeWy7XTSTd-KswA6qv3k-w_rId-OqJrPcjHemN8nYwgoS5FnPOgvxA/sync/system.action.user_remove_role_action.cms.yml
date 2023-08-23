@@ -1,0 +1,14 @@
+uuid: c14bf7f4-c9c9-45ca-8653-c79f96f390a7
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.cms
+  module:
+    - user
+id: user_remove_role_action.cms
+label: 'Remove the cms role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: cms

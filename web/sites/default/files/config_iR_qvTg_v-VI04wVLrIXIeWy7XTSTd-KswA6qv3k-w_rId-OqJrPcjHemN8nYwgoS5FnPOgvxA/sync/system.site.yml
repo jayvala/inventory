@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
+langcode: en
+uuid: b73063ae-6ea2-45b6-bbdb-e2a57a6807ed
+name: Inventory
+mail: test@test.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /custom-table-view
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

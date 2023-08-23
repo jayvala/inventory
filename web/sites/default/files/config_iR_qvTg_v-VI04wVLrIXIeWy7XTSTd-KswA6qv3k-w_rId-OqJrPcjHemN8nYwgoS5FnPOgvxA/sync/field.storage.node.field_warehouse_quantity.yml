@@ -1,0 +1,20 @@
+uuid: 98bc7969-3727-4093-b59b-320855f517b5
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_warehouse_quantity
+field_name: field_warehouse_quantity
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

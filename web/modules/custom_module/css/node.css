@@ -1,0 +1,25 @@
+#edit-field-as-of-date-0 {
+  border: none;
+}
+#edit-field-as-of-date-0 > legend {
+  background-color: #fff;
+} 
+#edit-field-as-of-date-0 > legend span{
+  color: #000;
+  font-weight: normal;
+  font-size: large;
+  margin-left: -15px;
+}
+#edit-field-as-of-date-0 > .fieldset__wrapper {
+  padding: 0px;
+}
+[type="text"] {
+  max-width: 50% !important;
+}
+
+#webform-submission-product-stock-update-add-form #edit-product-title {
+  max-width: 50%
+}
+#webform-submission-product-stock-update-add-form #edit-variant {
+  max-width: 50%
+}

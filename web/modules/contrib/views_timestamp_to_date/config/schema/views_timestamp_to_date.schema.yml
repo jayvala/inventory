@@ -1,0 +1,7 @@
+views.field.views_timestamp_to_date:
+  type: views_field
+  label: 'Timestamp to Date'
+  mapping:
+    timestamp_field:
+      type: string
+      label: 'Timestamp Field'

@@ -1,0 +1,35 @@
+uuid: 219b7232-32d4-44be-ba4c-14ccd8e9bc16
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - filter.format.restricted_html
+    - node.type.product
+    - taxonomy.vocabulary.variants
+  module:
+    - field_ui
+    - filter
+    - node
+    - taxonomy
+id: cms
+label: cms
+weight: 4
+is_admin: null
+permissions:
+  - 'access user profiles'
+  - 'administer content types'
+  - 'administer node form display'
+  - 'cancel account'
+  - 'change own username'
+  - 'create product content'
+  - 'create terms in variants'
+  - 'delete terms in variants'
+  - 'edit any product content'
+  - 'edit own product content'
+  - 'edit terms in variants'
+  - 'select account cancellation method'
+  - 'use text format full_html'
+  - 'use text format restricted_html'
+  - 'view product revisions'
+  - 'view user email addresses'

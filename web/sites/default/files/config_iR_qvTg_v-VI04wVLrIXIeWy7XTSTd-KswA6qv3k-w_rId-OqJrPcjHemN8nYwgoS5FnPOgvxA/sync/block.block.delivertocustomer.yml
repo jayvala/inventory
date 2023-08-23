@@ -1,0 +1,30 @@
+uuid: 9605b1c6-bf32-4f2a-99e7-055b660434ba
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:7fe5396f-b82f-45b9-8051-fad09c8d7d10'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: delivertocustomer
+theme: olivero
+region: content_above
+weight: -7
+provider: null
+plugin: 'block_content:7fe5396f-b82f-45b9-8051-fad09c8d7d10'
+settings:
+  id: 'block_content:7fe5396f-b82f-45b9-8051-fad09c8d7d10'
+  label: 'Deliver to Customer'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'

@@ -1,0 +1,71 @@
+uuid: eb60f675-43d8-481c-ac6e-4c0b3f26fd33
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.product.body
+    - field.field.node.product.field_as_of_date
+    - field.field.node.product.field_product_image
+    - field.field.node.product.field_variants
+    - field.field.node.product.field_warehouse_quantity
+    - node.type.product
+  module:
+    - datetime
+    - image
+    - text
+    - user
+id: node.product.default
+targetEntityType: node
+bundle: product
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_as_of_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: Asia/Kolkata
+      format_type: html_date
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_product_image:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_variants:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_warehouse_quantity:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

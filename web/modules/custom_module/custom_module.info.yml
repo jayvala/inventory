@@ -1,0 +1,9 @@
+name: Custom module for product stock
+description: It process the data and render it in the view
+package: Custom
+
+type: module
+core_version_requirement: ^9 || ^10
+
+dependencies:
+  - webform:webform (>=6.1.0)

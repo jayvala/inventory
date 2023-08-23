@@ -1,0 +1,30 @@
+uuid: 6086bfb9-fcc7-444e-9a66-b4c9dac534b9
+langcode: en
+status: false
+dependencies:
+  content:
+    - 'block_content:basic:2169a715-9ca5-4340-a4f4-03b14a6f7cbc'
+  module:
+    - block_content
+    - system
+  theme:
+    - olivero
+id: intransit
+theme: olivero
+region: content_above
+weight: -8
+provider: null
+plugin: 'block_content:2169a715-9ca5-4340-a4f4-03b14a6f7cbc'
+settings:
+  id: 'block_content:2169a715-9ca5-4340-a4f4-03b14a6f7cbc'
+  label: 'In Transit'
+  label_display: visible
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
